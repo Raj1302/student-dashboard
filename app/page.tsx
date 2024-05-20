@@ -1,113 +1,193 @@
-import Image from "next/image";
+import Heatmap from "@/components/heatmap";
+import Graph1 from "@/components/linegraph1";
+import Graph2 from "@/components/linegraph2";
+import Graph3 from "@/components/linegraph3";
+import Pie1 from "@/components/piechart1";
+import Pie2 from "@/components/piechart2";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import BarGraph from "@/components/bargraph";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div className="w-full max-md:p-4 overflow-hidden grid md:grid-cols-3 max-md:grid-cols-1 gap-6">
+        <div className="p-6 bg-white border shadow-xl rounded-2xl flex flex-col gap-4 items-center justify-center">
+          <h1 className="font-bold text-lg text-zinc-500">TOTAL QUESTIONS</h1>
+          <h1 className="font-bold text-7xl ">156</h1>
+        </div>
+        <div className="p-6 bg-white border shadow-xl flex max-md:flex-col max-md:gap-4 rounded-2xl md:col-span-2">
+          <Heatmap />
+          <div className="w-full flex flex-col gap-4 items-center justify-center">
+            <h1 className="font-light text-zinc-600">
+              Current Streak: <span className="text-zinc-900 font-bold">2</span>
+            </h1>
+            <h1 className="font-bold text-6xl">11</h1>
+            <h1 className="font-light">Max. Streak</h1>
+          </div>
+        </div>
+        <div className="p-6 bg-white border shadow-xl rounded-2xl md:col-span-2 flex flex-col gap-4">
+          <h1 className="font-light">
+            Total Test: <span className="font-bold text-2xl">23</span>
+          </h1>
+          <Tabs defaultValue="1" className="">
+            <TabsList className="">
+              <TabsTrigger value="1">Chapter 1</TabsTrigger>
+              <TabsTrigger value="2">Chapter 2</TabsTrigger>
+              <TabsTrigger value="3">Chapter 3</TabsTrigger>
+            </TabsList>
+            <TabsContent value="1">
+              <Graph1 />
+            </TabsContent>
+            <TabsContent value="2">
+              <Graph2 />
+            </TabsContent>
+            <TabsContent value="3">
+              <Graph3 />
+            </TabsContent>
+          </Tabs>
+        </div>
+        <div className="p-6 bg-white border shadow-xl rounded-2xl flex flex-col gap-4 items-center">
+          <h1 className="text-center font-light">Questions Solved</h1>
+          <Separator className="bg-zinc-400" />
+          <h1 className="text-center font-light text-sm">Module 1</h1>
+          <div className="flex w-full items-center">
+            <Pie1 />
+            <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex justify-between bg-zinc-100 p-2 rounded-xl border">
+                <h1>Intro 1</h1>
+                <h1>40</h1>
+              </div>
+              <div className="w-full flex justify-between bg-zinc-100 p-2 rounded-xl border">
+                <h1>Intro 2</h1>
+                <h1>22</h1>
+              </div>
+              <div className="w-full flex justify-between bg-zinc-100 p-2 rounded-xl border">
+                <h1>Intro 3</h1>
+                <h1>11</h1>
+              </div>
+            </div>
+          </div>
+          <Separator className="bg-zinc-400" />
+          <div className="flex w-full items-center">
+            <Pie2 />
+            <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex justify-between bg-zinc-100 p-2 rounded-xl border">
+                <h1>Chapter 1</h1>
+                <h1>20</h1>
+              </div>
+              <div className="w-full flex justify-between bg-zinc-100 p-2 rounded-xl border">
+                <h1>Chapter 2</h1>
+                <h1>32</h1>
+              </div>
+              <div className="w-full flex justify-between bg-zinc-100 p-2 rounded-xl border">
+                <h1>Chapter 3</h1>
+                <h1>31</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="p-6 bg-white border shadow-xl rounded-2xl md:col-span-2 flex flex-col gap-4">
+          <h1 className="text-lg font-light">Awards:</h1>
+          <div className="flex gap-4 justify-center">
+            <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+              <AvatarImage src="/badge1.png" />
+            </Avatar>
+            <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+              <AvatarImage src="/badge2.png" />
+            </Avatar>
+            <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+              <AvatarImage src="badge3.png" />
+            </Avatar>
+            <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+              <AvatarImage src="badge4.png" />
+            </Avatar>
+          </div>
+          <Dialog>
+            <DialogTrigger>Show More</DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Awards List</DialogTitle>
+                <DialogDescription className="grid grid-cols-3">
+                  <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+                    <AvatarImage src="/badge1.png" />
+                  </Avatar>
+                  <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+                    <AvatarImage src="/badge2.png" />
+                  </Avatar>
+                  <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+                    <AvatarImage src="badge3.png" />
+                  </Avatar>
+                  <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+                    <AvatarImage src="badge4.png" />
+                  </Avatar>
+                  <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+                    <AvatarImage src="badge5.png" />
+                  </Avatar>
+                  <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+                    <AvatarImage src="badge6.png" />
+                  </Avatar>
+                  <Avatar className="h-32 w-32 max-md:h-14 max-md:w-14">
+                    <AvatarImage src="badge7.png" />
+                  </Avatar>
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        </div>
+        <div className="p-6 bg-white border shadow-xl rounded-2xl row-span-2 flex flex-col gap-2 items-center">
+          <h1 className="text-center font-light">Ranking</h1>
+          <Separator className="bg-zinc-400" />
+          <h1 className="text-center font-light text-sm">Chapter 1</h1>
+          <div className="flex w-full items-center gap-4">
+            <Avatar className="h-32 w-32">
+              <AvatarImage src="/badge5.png" />
+            </Avatar>
+            <div className="w-full flex flex-col items-center gap-2">
+              <h1 className="text-2xl font-bold">2892</h1>
+              <h1 className="text-sm font-light">(min:1982)</h1>
+              <h1 className="text-sm font-light">Very Good</h1>
+            </div>
+          </div>
+          <Separator className="bg-zinc-400" />
+          <h1 className="text-center font-light text-sm">Chapter 2</h1>
+          <div className="flex w-full items-center gap-4">
+            <Avatar className="h-32 w-32">
+              <AvatarImage src="/badge6.png" />
+            </Avatar>
+            <div className="w-full flex flex-col items-center gap-2">
+              <h1 className="text-2xl font-bold">2395</h1>
+              <h1 className="text-sm font-light">(min:2395)</h1>
+              <h1 className="text-sm font-light">Good</h1>
+            </div>
+          </div>
+          <Separator className="bg-zinc-400" />
+          <h1 className="text-center font-light text-sm">Chapter 3</h1>
+          <div className="flex w-full items-center gap-4">
+            <Avatar className="h-32 w-32">
+              <AvatarImage src="/badge7.png" />
+            </Avatar>
+            <div className="w-full flex flex-col items-center gap-2">
+              <h1 className="text-2xl font-bold">1233</h1>
+              <h1 className="text-sm font-light">(min:709)</h1>
+              <h1 className="text-sm font-light">Excellent</h1>
+            </div>
+          </div>
+        </div>
+        <div className="p-6 bg-white border shadow-xl rounded-2xl md:col-span-2 flex flex-col gap-4">
+          <h1 className="text-lg font-light">Topic Analysis</h1>
+          <BarGraph />
         </div>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
 }
